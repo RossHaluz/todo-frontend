@@ -16,15 +16,13 @@ const DachboardLayout = async ({
 
   const boards = (await getAllBoards()) || [];
 
-  console.log("boards", boards);
-
   return (
     <div className="h-full">
       <div className="lg:pl-64 max-h-max fixed inset-y-0 w-full z-50">
         <Navbar />
       </div>
       <div className="hidden lg:flex h-full w-64 flex-col fixed inset-y-0 border-r z-50">
-        <Sidebar boards={boards} />
+        <Sidebar boards={boards ? boards?.boards : []} />
       </div>
       <main className="lg:pl-72 pt-20 h-full pr-20">{children}</main>
     </div>

@@ -8,9 +8,16 @@ export interface User {
 }
 
 export interface Board {
-  id: string;
-  title: string;
-  columns: Column[];
+  boards: {
+    id: string;
+    title: string;
+    columns: Column[];
+  }[];
+  memberBoards: {
+    id: string;
+    title: string;
+    columns: Column[];
+  }[];
 }
 
 export interface Column {

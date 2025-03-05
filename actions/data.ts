@@ -82,7 +82,7 @@ export const getGetBoardDetails = async (
 };
 
 //Get all boards
-export const getAllBoards = async (): Promise<Board[] | null> => {
+export const getAllBoards = async (): Promise<Board | null> => {
   const tokenCookie = (await cookies()).get("__token");
   const token = tokenCookie ? tokenCookie.value : null;
   try {
@@ -91,9 +91,8 @@ export const getAllBoards = async (): Promise<Board[] | null> => {
         Authorization: `Bearer ${token}`,
       },
     });
-    console.log("data", data);
 
-    return data?.data?.boards;
+    return data?.data || null; 
   } catch (error: unknown) {
     if (error instanceof AxiosError) {
       console.log("CURRENT USER ERROR:", error.message);
@@ -103,6 +102,6 @@ export const getAllBoards = async (): Promise<Board[] | null> => {
       console.log("Unknown error:", error);
     }
 
-    return null;
+    return null; 
   }
 };
