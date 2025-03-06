@@ -14,7 +14,7 @@ const DachboardLayout = async ({
     redirect("/login");
   }
 
-  const boards = (await getAllBoards()) || [];
+  const boards = (await getAllBoards()) || { boards: [], memberBoards: [] };
 
   return (
     <div className="h-full">
@@ -22,7 +22,7 @@ const DachboardLayout = async ({
         <Navbar />
       </div>
       <div className="hidden lg:flex h-full w-64 flex-col fixed inset-y-0 border-r z-50">
-        <Sidebar boards={boards ? boards?.boards : []} />
+        <Sidebar boards={boards.boards} memberBoards={boards.memberBoards} />
       </div>
       <main className="lg:pl-72 pt-20 h-full pr-20">{children}</main>
     </div>

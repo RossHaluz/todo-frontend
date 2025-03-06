@@ -1,4 +1,4 @@
-import { Board, Column, User } from "@/lib/types";
+import { Board, Column, MemberBoard, User } from "@/lib/types";
 import axios, { AxiosError } from "axios";
 import { cookies } from "next/headers";
 
@@ -82,17 +82,20 @@ export const getGetBoardDetails = async (
 };
 
 //Get all boards
-export const getAllBoards = async (): Promise<Board | null> => {
+export const getAllBoards = async (): Promise<{
+  boards: Board[];
+  memberBoards: MemberBoard[];
+} | null> => {
   const tokenCookie = (await cookies()).get("__token");
   const token = tokenCookie ? tokenCookie.value : null;
   try {
-    const { data } = await axios.get("/board", {
+    const responce = await axios.get("/board", {
       headers: {
         Authorization: `Bearer ${token}`,
       },
     });
 
-    return data?.data || null; 
+    return responce?.data?.data || null;
   } catch (error: unknown) {
     if (error instanceof AxiosError) {
       console.log("CURRENT USER ERROR:", error.message);
@@ -102,6 +105,6 @@ export const getAllBoards = async (): Promise<Board | null> => {
       console.log("Unknown error:", error);
     }
 
-    return null; 
+    return null;
   }
 };

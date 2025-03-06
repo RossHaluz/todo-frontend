@@ -1,11 +1,17 @@
-import React from "react";
+import React, { FC } from "react";
 import Billboars from "./boards";
-import { Board } from "@/lib/types";
+import { Board, MemberBoard } from "@/lib/types";
 
-const Sidebar = ({boards}: {boards: Board[]}) => {
+const Sidebar = ({
+  boards,
+  memberBoards,
+}: {
+  boards: Board[] | [];
+  memberBoards: MemberBoard[] | [];
+}) => {
   return (
     <div className="h-full lg:border-r overflow-y-auto bg-white shadow-sm p-4">
-      <Billboars boards={boards} />
+      <Billboars boards={boards} memberBoards={memberBoards} />
     </div>
   );
 };

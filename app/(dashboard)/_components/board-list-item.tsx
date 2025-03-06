@@ -15,6 +15,8 @@ import Link from "next/link";
 import BoardForm from "./board-form";
 import { toast } from "sonner";
 import api from "@/lib/api";
+import { useParams } from "next/navigation";
+import { cn } from "@/lib/utils";
 
 interface BoardListItemProps {
   item: Board;
@@ -22,6 +24,7 @@ interface BoardListItemProps {
 
 const BoardListItem: FC<BoardListItemProps> = ({ item }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const params = useParams();
 
   const hadleDeleteBoard = async (id: string) => {
     try {
@@ -35,10 +38,16 @@ const BoardListItem: FC<BoardListItemProps> = ({ item }) => {
   };
 
   return (
-    <li className="py-5 flex items-center justify-between gap-2" key={item?.id}>
-      <Link href={`/${item?.id}`} className="text-[#161616]/[50%]">
-        {item?.title}
-      </Link>
+    <li
+      className={cn(
+        "py-5 px-3 flex items-center justify-between rounded-md gap-2 text-[#161616]/[50%]",
+        {
+          "bg-[#F6F6F7] text-[161616]": item?.id === params?.boardId,
+        }
+      )}
+      key={item?.id}
+    >
+      <Link href={`/${item?.id}`}>{item?.title}</Link>
 
       <div className="flex items-center gap-2">
         <Dialog open={isOpen} onOpenChange={() => setIsOpen((prev) => !prev)}>
