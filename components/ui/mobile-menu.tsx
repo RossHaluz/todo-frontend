@@ -1,4 +1,3 @@
-import Sidebar from "@/app/(dashboard)/_components/sidebar";
 import {
   Sheet,
   SheetContent,
@@ -18,7 +17,6 @@ const MobileMenu = () => {
         <SheetHeader>
           <SheetTitle>Menu</SheetTitle>
         </SheetHeader>
-        <Sidebar />
       </SheetContent>
     </Sheet>
   );

@@ -25,7 +25,7 @@ const formSchema = z.object({
 
 const LoginForm = () => {
   const router = useRouter();
-  const [errorMessage, serErrorMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -49,9 +49,14 @@ const LoginForm = () => {
 
       toast.success("Success sign in");
       return router.push("/");
-    } catch (error: any) {
-      console.log(error);
-      serErrorMessage(error?.response?.data?.message);
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        setErrorMessage(
+          error.response?.data?.message || "Something went wrong"
+        );
+      } else {
+        setErrorMessage("Something went wrong");
+      }
     }
   };
 
@@ -104,7 +109,7 @@ const LoginForm = () => {
         </Form>
       </div>
       <h3 className="text-base font-medium text-center">
-        Dont't have account?{" "}
+        Dont&lsquo;t have account?{" "}
         <Link href="/register" className="text-blue-400 underline">
           Sign up
         </Link>

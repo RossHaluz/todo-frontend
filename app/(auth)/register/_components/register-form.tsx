@@ -26,7 +26,7 @@ const formSchema = z.object({
 
 const RegisterForm = () => {
   const router = useRouter();
-  const [errorMessage, serErrorMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -45,9 +45,14 @@ const RegisterForm = () => {
 
       toast.success("Succes register. Please sing in to your account.");
       return router.push("/login");
-    } catch (error: any) {
-      console.log(error);
-      serErrorMessage(error?.response?.data?.message);
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        setErrorMessage(
+          error.response?.data?.message || "Something went wrong"
+        );
+      } else {
+        setErrorMessage("Something went wrong");
+      }
     }
   };
 

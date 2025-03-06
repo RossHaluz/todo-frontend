@@ -1,7 +1,7 @@
 "use client";
 import { Column } from "@/lib/types";
 import { Button } from "@/components/ui/button";
-import { Edit, Plus, Trash } from "lucide-react";
+import { Edit, Trash } from "lucide-react";
 import React, { useState } from "react";
 import {
   Dialog,

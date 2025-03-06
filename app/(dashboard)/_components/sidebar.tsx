@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React from "react";
 import Billboars from "./boards";
 import { Board, MemberBoard } from "@/lib/types";
 

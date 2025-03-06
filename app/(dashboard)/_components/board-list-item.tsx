@@ -28,7 +28,7 @@ const BoardListItem: FC<BoardListItemProps> = ({ item }) => {
 
   const hadleDeleteBoard = async (id: string) => {
     try {
-      await api.delete(`/board/delete/${item?.id}`);
+      await api.delete(`/board/delete/${id}`);
       setIsOpen(false);
       toast.success("Board success delete");
     } catch (error) {
